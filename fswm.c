@@ -17,8 +17,7 @@ int main(int argc, char *argv[]) {
 	client_current->window = window_root;
 	client_current->next = client_current;
 	XSelectInput(display, window_root, SubstructureRedirectMask);
-	if (argc < 2)
-		return 1;
+	if (argc < 2) {;}
 	XGrabKey(display, XKeysymToKeycode(display, XK_m), Mod4Mask, window_root, True, GrabModeAsync, GrabModeAsync);
 	XGrabKey(display, XKeysymToKeycode(display, XK_j), Mod4Mask, window_root, True, GrabModeAsync, GrabModeAsync);
 	XGrabKey(display, XKeysymToKeycode(display, XK_k), Mod4Mask, window_root, True, GrabModeAsync, GrabModeAsync);

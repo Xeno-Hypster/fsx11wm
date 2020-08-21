@@ -1,6 +1,7 @@
 #include <X11/XKBlib.h>
 #include <X11/keysym.h>
 #include <stdlib.h>
+#include <signal.h>
 #include <unistd.h>
 
 typedef struct Client {
@@ -17,6 +18,7 @@ int main(int argc, char *argv[]) {
 	client_current->window = window_root;
 	client_current->next = client_current;
 	XSelectInput(display, window_root, SubstructureRedirectMask);
+	signal(SIGCHLD, SIG_IGN);
 	if (argc < 2) {;}
 	XGrabKey(display, XKeysymToKeycode(display, XK_m), Mod4Mask, window_root, True, GrabModeAsync, GrabModeAsync);
 	XGrabKey(display, XKeysymToKeycode(display, XK_j), Mod4Mask, window_root, True, GrabModeAsync, GrabModeAsync);

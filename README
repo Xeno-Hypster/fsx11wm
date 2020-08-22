@@ -1,4 +1,4 @@
-fswm is a full screen window manager for X written in less than 100 lines of C89.
+full screen X11 window manager with less than 100 lines of C89.
 
 Installation
 1. git clone https://github.com/pbizopoulos/fswm

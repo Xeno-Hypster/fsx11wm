@@ -17,6 +17,7 @@ int main(int argc, char *argv[]) {
 	Window window_root = DefaultRootWindow(display);
 	client_current->window = window_root;
 	client_current->next = client_current;
+	client_current->previous = client_current;
 	XSelectInput(display, window_root, SubstructureRedirectMask);
 	signal(SIGCHLD, SIG_IGN);
 	if (argc < 2) {;}

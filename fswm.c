@@ -14,16 +14,15 @@ int main(int argc, char *argv[]) {
 	Display *display = XOpenDisplay(0);
 	int screen = DefaultScreen(display);
 	Client *client_current = (Client *) calloc(1, sizeof(Client));
-	Window window_root = DefaultRootWindow(display);
-	client_current->window = window_root;
+	client_current->window = DefaultRootWindow(display);
 	client_current->next = client_current;
 	client_current->previous = client_current;
-	XSelectInput(display, window_root, SubstructureRedirectMask);
+	XSelectInput(display, client_current->window, SubstructureRedirectMask);
 	signal(SIGCHLD, SIG_IGN);
 	if (argc < 2) {;}
-	XGrabKey(display, XKeysymToKeycode(display, XK_m), Mod4Mask, window_root, True, GrabModeAsync, GrabModeAsync);
-	XGrabKey(display, XKeysymToKeycode(display, XK_j), Mod4Mask, window_root, True, GrabModeAsync, GrabModeAsync);
-	XGrabKey(display, XKeysymToKeycode(display, XK_k), Mod4Mask, window_root, True, GrabModeAsync, GrabModeAsync);
+	XGrabKey(display, XKeysymToKeycode(display, XK_m), Mod4Mask, client_current->window, True, GrabModeAsync, GrabModeAsync);
+	XGrabKey(display, XKeysymToKeycode(display, XK_j), Mod4Mask, client_current->window, True, GrabModeAsync, GrabModeAsync);
+	XGrabKey(display, XKeysymToKeycode(display, XK_k), Mod4Mask, client_current->window, True, GrabModeAsync, GrabModeAsync);
 	while (!XNextEvent(display, &event)) {
 		if (event.type == KeyPress) {
 			KeySym keysym = XkbKeycodeToKeysym(display, event.xkey.keycode, 0, 0);

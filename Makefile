@@ -4,7 +4,7 @@ CC = gcc
 CFLAGS = -std=c89 -Wall -Wextra -Werror -Wpedantic -O3
 LDLIBS = -lX11
 PREFIX = /usr/local
-PRG = fswm
+PRG = fsx11wm
 
 $(PRG): $(PRG).c Makefile
 	$(CC) $(CFLAGS) -o $@ $< $(LDLIBS)

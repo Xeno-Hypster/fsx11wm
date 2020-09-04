@@ -35,15 +35,14 @@ int main(int argc, char *argv[]) {
 				XRaiseWindow(display, client_current->previous->window);
 		} else if (event.type == MapRequest) {
 			Client *client_new = (Client *) calloc(1, sizeof(Client));
-			Window window = event.xmaprequest.window;
-			client_new->window = window;
+			client_new->window = event.xmaprequest.window;
 			client_current->next->previous = client_new;
 			client_new->previous = client_current;
 			client_new->next = client_current->next;
 			client_current->next = client_new;
-			XSelectInput(display, window, StructureNotifyMask|EnterWindowMask);
-			XMoveResizeWindow(display, window, 0, 0, XDisplayWidth(display, screen), XDisplayHeight(display, screen));
-			XMapWindow(display, window);
+			XSelectInput(display, client_new->window, StructureNotifyMask|EnterWindowMask);
+			XMoveResizeWindow(display, client_new->window, 0, 0, XDisplayWidth(display, screen), XDisplayHeight(display, screen));
+			XMapWindow(display, client_new->window);
 		} else if (event.type == EnterNotify) {
 			while (client_current->window != event.xcrossing.window)
 				client_current = client_current->next;
